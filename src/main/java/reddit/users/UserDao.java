@@ -30,7 +30,7 @@ public class UserDao {
 
             Class.forName(driver);
             connection = DriverManager.getConnection("jdbc:mysql://" + server + ":"
-                            + port + "/" + db + "?useSSL=false", user, pass);
+                            + port + "/" + db + "?verifyServerCertificate=false&useSSL=true", user, pass);
         } catch(Exception e) {
             e.printStackTrace();
         }
