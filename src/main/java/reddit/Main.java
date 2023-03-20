@@ -37,6 +37,7 @@ public class Main {
     }
 
     public static void deleteUser() {
+
         String lastname;
 
         System.out.println("Type a lastname: ");
@@ -47,6 +48,7 @@ public class Main {
     }
 
     public static void calculate() {
+
         Integer x;
         Integer y;
 
@@ -63,6 +65,7 @@ public class Main {
     }
 
     public static void updateUser() {
+
         String lastname;
         String name;
         Integer id;
@@ -112,6 +115,7 @@ public class Main {
             if (choice == 'x') break;
 
             System.out.println("\n");
+
 
             switch (choice) {
                 case '1' -> createUser();
