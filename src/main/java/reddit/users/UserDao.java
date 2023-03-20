@@ -67,8 +67,8 @@ public class UserDao {
             String query = "insert into " + tableName + " (name, lastname, age) values(?, ?, ?)";
             statement = connection.prepareStatement(query);
 
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getLastname());
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
             statement.setInt(3, user.getAge());
 
             statement.execute();
@@ -99,8 +99,8 @@ public class UserDao {
             String query = "update " + tableName + " set name = ?, lastname = ?, age = ? where id=?";
             statement = connection.prepareStatement(query);
 
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getLastname());
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
             statement.setInt(3, user.getAge());
             statement.setInt(4, user.getId());
 

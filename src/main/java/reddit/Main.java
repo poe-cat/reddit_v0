@@ -14,7 +14,9 @@ public class Main {
     static UserDao userDao = new UserDao();
 
     public static void createUser() {
-        String name, lastname;
+
+        String name;
+        String lastname;
         Integer age;
 
         System.out.println("Type a name: ");
@@ -110,8 +112,8 @@ public class Main {
                     userDao = new UserDao();
                     List<User> allUsers = userDao.getAllUsers();
                     for(User user : allUsers) {
-                        System.out.println(ConsoleColors.BLUE_BRIGHT + user.getId() + ". " + user.getName() + " "
-                                + user.getLastname() + ", " + user.getAge());
+                        System.out.println(ConsoleColors.BLUE_BRIGHT + user.getId() + ". " + user.getFirstName() + " "
+                                + user.getLastName() + ", " + user.getAge());
                     }
                 }
                 case '4' -> {
