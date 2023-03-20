@@ -12,7 +12,7 @@ public class UserDao {
     static Properties properties = Utils.getProperties();
 
     private Connection connection;
-    private final String tableName = "employees";
+    private final String tableName = "admin";
 
     public UserDao() {
         init();
@@ -30,7 +30,8 @@ public class UserDao {
 
             Class.forName(driver);
             connection = DriverManager.getConnection("jdbc:mysql://" + server + ":"
-                            + port + "/" + db + "?verifyServerCertificate=false&useSSL=true", user, pass);
+                            + port + "/" + db + "?verifyServerCertificate=false&useSSL=true&createDatabaseIfNotExist=true",
+                    user, pass);
         } catch(Exception e) {
             e.printStackTrace();
         }
