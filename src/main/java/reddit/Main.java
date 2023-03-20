@@ -40,11 +40,12 @@ public class Main {
         lastname = scanner.next();
 
         userDao.deleteUser(lastname);
-        System.out.println("Deleted usera: " + lastname);
+        System.out.println("Deleted user: " + lastname);
     }
 
     public static void calculate() {
-        Integer x, y;
+        Integer x;
+        Integer y;
 
         System.out.println("Type first number: ");
         x = scanner.nextInt();
@@ -59,8 +60,10 @@ public class Main {
     }
 
     public static void updateUser() {
-        String lastname, name;
-        Integer id, age;
+        String lastname;
+        String name;
+        Integer id;
+        Integer age;
 
         System.out.println("Type user id to update: ");
         id = scanner.nextInt();
@@ -82,7 +85,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        char choice, ignore;
+        char choice;
+        char ignore;
 
         for(;;) {
             do {
