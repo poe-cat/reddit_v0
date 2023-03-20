@@ -21,6 +21,9 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "age")
+    private Integer age;
+
     public User() {
     }
 
@@ -37,7 +40,6 @@ public class User {
         this.age = age;
     }
 
-    private Integer age;
 
     public Integer getId() {
         return id;
@@ -71,5 +73,14 @@ public class User {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
 
