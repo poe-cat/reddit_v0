@@ -10,9 +10,9 @@ import java.util.Properties;
 public class UserDao {
 
     static Properties properties = Utils.getProperties();
-
     private Connection connection;
-    private final String tableName = "employees";
+    private final String tableName = "admin";
+
 
     public UserDao() {
         init();
@@ -30,13 +30,15 @@ public class UserDao {
 
             Class.forName(driver);
             connection = DriverManager.getConnection("jdbc:mysql://" + server + ":"
-                            + port + "/" + db + "?verifyServerCertificate=false&useSSL=true", user, pass);
+                            + port + "/" + db + "?verifyServerCertificate=false&useSSL=true&createDatabaseIfNotExist=true",
+                    user, pass);
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
 
     public List<User> getAllUsers() {
+
         List<User> users = new LinkedList<User>();
         Statement statement = null;
         try {
@@ -62,13 +64,14 @@ public class UserDao {
     }
 
     public void createUser(User user) {
+
         PreparedStatement statement;
         try {
             String query = "insert into " + tableName + " (name, lastname, age) values(?, ?, ?)";
             statement = connection.prepareStatement(query);
 
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getLastname());
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
             statement.setInt(3, user.getAge());
 
             statement.execute();
@@ -79,6 +82,7 @@ public class UserDao {
     }
 
     public void deleteUser(String lastname) {
+
         PreparedStatement statement;
         try {
             String query = "delete from " + tableName + " where lastname=?";
@@ -94,13 +98,14 @@ public class UserDao {
     }
 
     public void updateUser(User user) {
+
         PreparedStatement statement;
         try {
             String query = "update " + tableName + " set name = ?, lastname = ?, age = ? where id=?";
             statement = connection.prepareStatement(query);
 
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getLastname());
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
             statement.setInt(3, user.getAge());
             statement.setInt(4, user.getId());
 

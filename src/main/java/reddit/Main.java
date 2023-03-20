@@ -1,6 +1,8 @@
 package reddit;
 
 import console_style.ConsoleColors;
+import reddit.posts.Post;
+import reddit.posts.PostDao;
 import reddit.users.User;
 import reddit.users.UserDao;
 
@@ -12,9 +14,12 @@ public class Main {
 
     static Scanner scanner = new Scanner(System.in);
     static UserDao userDao = new UserDao();
+    static PostDao postDao = new PostDao();
 
     public static void createUser() {
-        String name, lastname;
+
+        String name;
+        String lastname;
         Integer age;
 
         System.out.println("Type a name: ");
@@ -32,17 +37,20 @@ public class Main {
     }
 
     public static void deleteUser() {
+
         String lastname;
 
         System.out.println("Type a lastname: ");
         lastname = scanner.next();
 
         userDao.deleteUser(lastname);
-        System.out.println("Deleted usera: " + lastname);
+        System.out.println("Deleted user: " + lastname);
     }
 
     public static void calculate() {
-        Integer x, y;
+
+        Integer x;
+        Integer y;
 
         System.out.println("Type first number: ");
         x = scanner.nextInt();
@@ -57,8 +65,11 @@ public class Main {
     }
 
     public static void updateUser() {
-        String lastname, name;
-        Integer id, age;
+
+        String lastname;
+        String name;
+        Integer id;
+        Integer age;
 
         System.out.println("Type user id to update: ");
         id = scanner.nextInt();
@@ -80,7 +91,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        char choice, ignore;
+        char choice;
+        char ignore;
 
         for(;;) {
             do {
@@ -89,7 +101,8 @@ public class Main {
                 System.out.println("Delete user - tap 2");
                 System.out.println("Display all users - tap 3");
                 System.out.println("Update user - tap 4");
-                System.out.println("Use calculator - tap 5");
+                System.out.println("Show all posts - tap 5");
+                System.out.println("Use calculator - tap 6");
                 System.out.println("Exit - tap x\n" + ConsoleColors.RESET);
 
                 choice = (char) System.in.read();
@@ -97,11 +110,12 @@ public class Main {
                 do {
                     ignore = (char) System.in.read();
                 } while (ignore != '\n');
-            } while (choice < '1' | choice > '5' & choice != 'x');
+            } while (choice < '1' | choice > '6' & choice != 'x');
 
             if (choice == 'x') break;
 
             System.out.println("\n");
+
 
             switch (choice) {
                 case '1' -> createUser();
@@ -110,8 +124,8 @@ public class Main {
                     userDao = new UserDao();
                     List<User> allUsers = userDao.getAllUsers();
                     for(User user : allUsers) {
-                        System.out.println(ConsoleColors.BLUE_BRIGHT + user.getId() + ". " + user.getName() + " "
-                                + user.getLastname() + ", " + user.getAge());
+                        System.out.println(ConsoleColors.BLUE_BRIGHT + user.getId() + ". " + user.getFirstName() + " "
+                                + user.getLastName() + ", " + user.getAge());
                     }
                 }
                 case '4' -> {
@@ -119,7 +133,15 @@ public class Main {
                     System.out.println(userDao.getAllUsers());
                     updateUser();
                 }
-                case '5' -> calculate();
+                case '5' -> {
+                    postDao = new PostDao();
+                    List<Post> allPosts = postDao.getAllPosts();
+                    for(Post post : allPosts) {
+                        System.out.println(ConsoleColors.BLUE_BRIGHT + post.getPostID() + ". " + post.getPostContent() + " "
+                                + post.getPostDate() + ", " + post.getPostRate() + ", " + post.getUserID());
+                    }
+                }
+                case '6' -> calculate();
             }
         }
     }
